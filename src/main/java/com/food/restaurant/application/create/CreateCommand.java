@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 public class CreateCommand {
 
-    private String name;
+    private final String name;
 
-    private BigDecimal feeTransportTaxe;
+    private final BigDecimal feeTransportTaxe;
 
     public CreateCommand(String name, BigDecimal feeTransportTaxe) {
         this.name = name;
