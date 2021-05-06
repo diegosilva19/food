@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Table(name="permissions")
 public class Permission {
 
-    @Id
     @EqualsAndHashCode.Include
+    @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int Id;
 

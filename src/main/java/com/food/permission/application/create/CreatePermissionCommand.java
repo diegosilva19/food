@@ -9,7 +9,7 @@ public class CreatePermissionCommand {
     public CreatePermissionCommand(String description, String name)
     {
         this.description = description;
-        this.name = description;
+        this.name = name;
     }
 
     public String getDescription() {
