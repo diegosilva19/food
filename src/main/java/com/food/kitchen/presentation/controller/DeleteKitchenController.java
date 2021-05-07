@@ -27,10 +27,10 @@ public class DeleteKitchenController {
             this.handler.handle(command);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch(NotFoundKitchenExeception exception) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error");
         } catch(DataIntegrityViolationException exception) {
             //foreign key integrity
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Exclusion Error: " + exception.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Exclusion Error: " + exception.getMessage());
         }
     }
 }

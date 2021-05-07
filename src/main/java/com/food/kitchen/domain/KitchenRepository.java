@@ -16,5 +16,6 @@ public interface KitchenRepository {
 
     void delete(Kitchen kitchen);
 
+    void delete(Long kitchenId);
 }
 

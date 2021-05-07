@@ -42,11 +42,18 @@ class KitchenRepositoryImpl implements KitchenRepository {
     @Override
     public void delete(Kitchen kitchen)
     {
+        this.manager.remove(kitchen);
+    }
+
+    @Transactional
+    @Override
+    public void delete(Long kitchenId)
+    {
         /**
          * Fazer search do lado de fora e mandar aqui não adianta,
          * acreditoq ue é devido a anotação transactional que precisa existir
          * para ter o estado "manager" do JPA aonde é possível provocar a deleção
          */
-        this.manager.remove(search(kitchen.getId()));
+        this.manager.remove(search(kitchenId));
     }
 }

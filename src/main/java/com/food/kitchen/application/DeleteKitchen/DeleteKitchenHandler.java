@@ -14,11 +14,7 @@ public class DeleteKitchenHandler {
 
     public boolean handle(DeleteKitchenCommand command) throws NotFoundKitchenExeception
     {
-        Kitchen kitchen = new Kitchen();
-        kitchen.setId(command.getKitchenId());
-        this.repository.delete(kitchen);
-
-        /*Kitchen kitchen = this.repository.search(command.getKitchenId());
+        Kitchen kitchen = this.repository.search(command.getKitchenId());
 
         if (kitchen == null) {
             throw new NotFoundKitchenExeception();
@@ -26,7 +22,6 @@ public class DeleteKitchenHandler {
 
         this.repository.delete(kitchen);
 
-         */
         return true;
     }
 }
