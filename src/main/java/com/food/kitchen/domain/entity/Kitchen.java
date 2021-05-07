@@ -20,7 +20,7 @@ public class Kitchen {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIgnore //not show this field when jackson convert object into json
+    //@JsonIgnore //not show this field when jackson convert object into json
     //@JsonProperty(value = "name_modified_only_rest")
     @Column(name = "name", length = 50)
     private String name;

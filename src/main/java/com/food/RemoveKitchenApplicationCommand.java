@@ -25,7 +25,7 @@ public class RemoveKitchenApplicationCommand {
 
         KitchenRepository handler = application.getBean(KitchenRepository.class);
         Kitchen cozinha = new Kitchen();
-        cozinha.setId(2L);
+        cozinha.setId(3L);
         handler.delete(cozinha);
     }
 }
