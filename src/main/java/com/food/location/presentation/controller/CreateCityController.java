@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping(path = "/city")
 public class CreateCityController {
 
@@ -19,7 +19,6 @@ public class CreateCityController {
     private CreateCityHandler handler;
 
     @PostMapping(value = "/create")
-    @ResponseBody
     public City invoke(@RequestBody Map<String, Object> parameters)
     {
         CreateCityCommand command = new CreateCityCommand(

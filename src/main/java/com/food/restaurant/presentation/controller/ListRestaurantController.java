@@ -2,13 +2,12 @@ package com.food.restaurant.presentation.controller;
 
 import com.food.restaurant.application.create.CreateHandler;
 import com.food.restaurant.presentation.response.CreateResponse;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping(path = "/restaurant")
+@RestController
+@RequestMapping(path = "/restaurants")
 public class ListRestaurantController {
 
     private final CreateHandler handler;
@@ -18,8 +17,7 @@ public class ListRestaurantController {
         this.handler = handler;
     }
 
-    @GetMapping("list")
-    @ResponseBody
+    @GetMapping("/list")
     public String invoke() {
         CreateResponse response = this.handler.handler();
 
