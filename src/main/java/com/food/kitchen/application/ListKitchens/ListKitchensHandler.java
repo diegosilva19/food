@@ -1,14 +1,14 @@
 package com.food.kitchen.application.ListKitchens;
 
 import com.food.kitchen.domain.entity.Kitchen;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Component
+@Service
 public class ListKitchensHandler {
 
 

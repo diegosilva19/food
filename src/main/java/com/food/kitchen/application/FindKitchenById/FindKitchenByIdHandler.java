@@ -3,9 +3,9 @@ package com.food.kitchen.application.FindKitchenById;
 import com.food.kitchen.domain.KitchenRepository;
 import com.food.kitchen.domain.entity.Kitchen;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class FindKitchenByIdHandler {
 
     @Autowired

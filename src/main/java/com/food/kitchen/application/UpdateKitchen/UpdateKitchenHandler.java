@@ -5,9 +5,9 @@ import com.food.kitchen.domain.entity.Kitchen;
 import com.food.kitchen.domain.exceptions.NotFoundKitchenExeception;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class UpdateKitchenHandler {
 
     @Autowired
