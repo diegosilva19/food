@@ -1,4 +1,4 @@
-package com.food.location.application.createState;
+package com.food.location.application.CreateState;
 
 import com.food.location.domain.StateRepository;
 import com.food.location.domain.entities.State;

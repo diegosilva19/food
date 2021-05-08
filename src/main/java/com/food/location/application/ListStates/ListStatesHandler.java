@@ -1,4 +1,4 @@
-package com.food.location.application.listStates;
+package com.food.location.application.ListStates;
 
 import com.food.location.domain.StateRepository;
 import com.food.location.domain.entities.State;

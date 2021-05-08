@@ -1,7 +1,7 @@
 package com.food.location.presentation.controller;
 
-import com.food.location.application.createState.CreateStateCommand;
-import com.food.location.application.createState.CreateStateHandler;
+import com.food.location.application.CreateState.CreateStateCommand;
+import com.food.location.application.CreateState.CreateStateHandler;
 import com.food.location.domain.entities.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping(path = "/state")
+@RequestMapping(path = "/states")
 public class CreateStateController {
 
     @Autowired

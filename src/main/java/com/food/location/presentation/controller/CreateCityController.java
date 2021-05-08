@@ -1,14 +1,11 @@
 package com.food.location.presentation.controller;
 
-import com.food.location.application.createCity.CreateCityCommand;
-import com.food.location.application.createCity.CreateCityHandler;
-import com.food.location.application.listCities.ListCitiesHandler;
+import com.food.location.application.CreateCity.CreateCityCommand;
+import com.food.location.application.CreateCity.CreateCityHandler;
 import com.food.location.domain.entities.City;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController

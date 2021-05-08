@@ -17,9 +17,9 @@ public class State {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Short id;
 
-    @Column(length = 30)
+    @Column(length = 30, nullable = false)
     private String name;
 
-    @Column(length = 2, columnDefinition = "Char(2)")
+    @Column(length = 2, columnDefinition = "Char(2)", nullable = false)
     private String uf;
 }

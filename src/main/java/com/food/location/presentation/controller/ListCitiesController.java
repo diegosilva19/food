@@ -1,6 +1,6 @@
 package com.food.location.presentation.controller;
 
-import com.food.location.application.listCities.ListCitiesHandler;
+import com.food.location.application.ListCities.ListCitiesHandler;
 import com.food.location.domain.entities.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

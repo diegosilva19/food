@@ -1,4 +1,4 @@
-package com.food.location.application.listCities;
+package com.food.location.application.ListCities;
 
 import com.food.location.domain.CityRepository;
 import com.food.location.domain.entities.City;
