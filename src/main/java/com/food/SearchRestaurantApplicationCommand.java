@@ -26,6 +26,6 @@ public class SearchRestaurantApplicationCommand {
 
         RestaurantRepository handler = application.getBean(RestaurantRepository.class);
         Restaurant item = handler.searchById(2L);
-        System.out.printf("%s - %f - %s", item.getNome(), item.getTaxaFrete(), item.getKitchen().getName());
+        System.out.printf("%s - %f - %s", item.getName(), item.getFeeTransportTaxe(), item.getKitchen().getName());
     }
 }

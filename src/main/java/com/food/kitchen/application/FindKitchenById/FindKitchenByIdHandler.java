@@ -15,4 +15,8 @@ public class FindKitchenByIdHandler {
     {
         return this.repository.search(finder.getKitchenId());
     }
+
+    public Kitchen handler(Long kitchenId) {
+        return this.repository.search(kitchenId);
+    }
 }

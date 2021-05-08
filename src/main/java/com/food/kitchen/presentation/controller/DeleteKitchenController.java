@@ -2,6 +2,7 @@ package com.food.kitchen.presentation.controller;
 
 import com.food.kitchen.application.DeleteKitchen.DeleteKitchenCommand;
 import com.food.kitchen.application.DeleteKitchen.DeleteKitchenHandler;
+import com.food.kitchen.domain.exceptions.KitchenInUseExeception;
 import com.food.kitchen.domain.exceptions.NotFoundKitchenExeception;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -28,8 +29,7 @@ public class DeleteKitchenController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch(NotFoundKitchenExeception exception) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error");
-        } catch(DataIntegrityViolationException exception) {
-            //foreign key integrity
+        } catch(KitchenInUseExeception exception) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Exclusion Error: " + exception.getMessage());
         }
     }
