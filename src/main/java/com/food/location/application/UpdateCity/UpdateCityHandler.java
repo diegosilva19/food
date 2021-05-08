@@ -1,15 +1,16 @@
-package com.food.location.application.CreateCity;
+package com.food.location.application.UpdateCity;
 
 import com.food.location.domain.CityRepository;
 import com.food.location.domain.StateRepository;
 import com.food.location.domain.entities.City;
 import com.food.location.domain.entities.State;
+import com.food.location.domain.exceptions.NotFoundCityException;
 import com.food.location.domain.exceptions.NotFoundStateException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
-public class CreateCityHandler {
+@Service
+public class UpdateCityHandler {
 
     @Autowired
     private CityRepository repository;
@@ -17,19 +18,19 @@ public class CreateCityHandler {
     @Autowired
     private StateRepository repositoryState;
 
-    public City handle(CreateCityCommand command)
+    public City handle(UpdateCityCommand command)
     {
-        City city = new City();
-        State state = new State();
+        City city = this.repository.searchById(command.getCity().getId());
 
-        state.setId(command.getStateId());
-
-        city.setName(command.getName());
-        city.setState(state);
+        if (city == null) {
+            throw new NotFoundCityException(command.getCity().getId());
+        }
 
         city = this.fetchStateDependecy(city);
 
-        return this.repository.save(city);
+        this.repository.save(city);
+
+        return city;
     }
 
     private City fetchStateDependecy(City city) {

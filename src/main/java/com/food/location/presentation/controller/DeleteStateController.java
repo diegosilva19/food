@@ -3,6 +3,7 @@ package com.food.location.presentation.controller;
 import com.food.location.application.DeleteStates.DeleteStatesCommand;
 import com.food.location.application.DeleteStates.DeleteStatesHandler;
 import com.food.location.domain.exceptions.CannotBeDeleteStateException;
+import com.food.location.domain.exceptions.NotFoundStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class DeleteStateController {
             DeleteStatesCommand command = new DeleteStatesCommand(stateId);
             this.handler.handle(command);
             return ResponseEntity.ok().build();
-        } catch (EntityNotFoundException exeception) {
+        } catch (NotFoundStateException exeception) {
             return ResponseEntity.notFound().build();
         } catch (CannotBeDeleteStateException exception) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());

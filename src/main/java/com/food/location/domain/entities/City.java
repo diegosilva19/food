@@ -16,10 +16,10 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Short id;
 
-    @Column(length = 50)
+    @Column(length = 50, nullable = false)
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "state_id")
+    @JoinColumn(name = "state_id", nullable = false)
     private State state;
 }

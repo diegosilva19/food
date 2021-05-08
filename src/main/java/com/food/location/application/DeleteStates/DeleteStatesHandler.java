@@ -3,10 +3,10 @@ package com.food.location.application.DeleteStates;
 import com.food.location.domain.StateRepository;
 import com.food.location.domain.entities.State;
 import com.food.location.domain.exceptions.CannotBeDeleteStateException;
+import com.food.location.domain.exceptions.NotFoundStateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import javax.persistence.EntityNotFoundException;
 
 @Service
 public class DeleteStatesHandler {
@@ -19,7 +19,7 @@ public class DeleteStatesHandler {
         State stateDatabase = this.repository.searchById(command.getStateId());
 
         if (stateDatabase == null) {
-            throw new EntityNotFoundException(String.format("State : %d not found", command.getStateId()));
+            throw new NotFoundStateException(command.getStateId());
         }
 
         try {
