@@ -29,7 +29,7 @@ public class Restaurant {
     private BigDecimal feeTransportTaxe;
 
     @ManyToOne
-    @JoinColumn(name = "kitchen_id") //default cozinha_id
+    @JoinColumn(name = "kitchen_id", nullable = false) //default cozinha_id
     //@JsonIgnore
     private Kitchen kitchen;
 
