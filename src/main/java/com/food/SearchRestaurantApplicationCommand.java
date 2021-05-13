@@ -1,6 +1,5 @@
 package com.food;
 
-import com.food.kitchen.domain.KitchenRepository;
 import com.food.restaurant.domain.RestaurantRepository;
 import com.food.restaurant.domain.entity.Restaurant;
 import org.springframework.boot.WebApplicationType;

@@ -14,14 +14,11 @@ public class UpdateKitchenHandler {
     private KitchenRepository repository;
 
     public Kitchen handle(UpdateKitchenCommand updateCommand) throws NotFoundKitchenExeception {
-        Kitchen kitchen = this.repository.search(updateCommand.getKitchen().getId());
-
-        if (kitchen == null) {
-            throw new NotFoundKitchenExeception();
-        }
+        Kitchen kitchen = this.repository.findById(updateCommand.getKitchen().getId())
+                                            .orElseThrow(NotFoundKitchenExeception::new);
 
         //mesma coisa que fazer set de propriedade a propriedade, ( tereiro parametro ignora propriedades X , Y , Z)
-        BeanUtils.copyProperties(updateCommand.getKitchen(), kitchen, "name");
+        BeanUtils.copyProperties(updateCommand.getKitchen(), kitchen);
 
         return this.repository.save(kitchen);
     }

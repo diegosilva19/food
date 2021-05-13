@@ -1,9 +1,7 @@
 package com.food.kitchen.Infrastructure.repositories.persistence;
 
-
-import com.food.kitchen.domain.KitchenRepository;
 import com.food.kitchen.domain.entity.Kitchen;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -11,13 +9,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Component
-class KitchenRepositoryImpl implements KitchenRepository {
+@Repository
+class KitchenRepositoryImpl {
 
     @PersistenceContext
     private EntityManager manager;
 
-    @Override
     public List<Kitchen> list()
     {
         //JPQL -- executar queries em cima dos objetos e não tabelas
@@ -25,28 +22,31 @@ class KitchenRepositoryImpl implements KitchenRepository {
         return query.getResultList();
     }
 
-    @Override
+    public List<Kitchen> searchByName(String name)
+    {
+        return manager.createQuery("from Kitchen where name LIKE :name", Kitchen.class)
+                .setParameter("name", "%" + name + "%")
+                .getResultList();
+    }
+
     public Kitchen search(Long id)
     {
         return this.manager.find(Kitchen.class, id);
     }
 
     @Transactional
-    @Override
     public Kitchen save(Kitchen item)
     {
         return this.manager.merge(item);
     }
 
     @Transactional
-    @Override
     public void delete(Kitchen kitchen)
     {
         this.manager.remove(kitchen);
     }
 
     @Transactional
-    @Override
     public void delete(Long kitchenId)
     {
         /**

@@ -23,6 +23,6 @@ public class SearchKitchenApplicationCommand {
                                             .run(args);
 
         KitchenRepository handler = application.getBean(KitchenRepository.class);
-        System.out.println(handler.search(2L));
+        System.out.println(handler.findById(2L));
     }
 }

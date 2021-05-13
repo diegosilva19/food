@@ -1,7 +1,6 @@
 package com.food.restaurant.application.CreateRestaurant;
 
 import com.food.kitchen.application.FindKitchenById.FindKitchenByIdHandler;
-import com.food.kitchen.domain.KitchenRepository;
 import com.food.kitchen.domain.entity.Kitchen;
 import com.food.kitchen.domain.exceptions.NotFoundKitchenExeception;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,8 @@ import com.food.restaurant.domain.entity.Restaurant;
 import com.food.restaurant.domain.event.CreateRestaurantEvent;
 import com.food.restaurant.domain.RestaurantRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class CreateRestaurantHandler {
@@ -45,14 +46,10 @@ public class CreateRestaurantHandler {
         Kitchen kitchen = restaurant.getKitchen();
 
         if (kitchen != null && kitchen.getId() != null) {
-            kitchen = this.kitchenFinder.handler(kitchen.getId());
+            Optional<Kitchen> kitchenSearch = this.kitchenFinder.handler(kitchen.getId());
+            restaurant.setKitchen(kitchenSearch.orElseThrow(NotFoundKitchenExeception::new));
         }
 
-        if (kitchen == null) {
-            throw new NotFoundKitchenExeception();
-        }
-
-        restaurant.setKitchen(kitchen);
         return restaurant;
     }
 }

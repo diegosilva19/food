@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path="/kitchens")
@@ -25,11 +26,8 @@ public class FindByIdKitchensController {
     @GetMapping(path = "/{kitchenId}")
     public ResponseEntity<Kitchen> invoke(@PathVariable Long kitchenId) {
         FindKitchenByIdQuery query = new FindKitchenByIdQuery(kitchenId);
-        Kitchen foundItem = this.handler.handler(query);
+        Optional<Kitchen> foundItem = this.handler.handler(query);
 
-        if (foundItem == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return ResponseEntity.ok(foundItem);
+        return foundItem.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }

@@ -5,18 +5,20 @@ import com.food.kitchen.domain.entity.Kitchen;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class FindKitchenByIdHandler {
 
     @Autowired
     private KitchenRepository repository;
 
-    public Kitchen handler(FindKitchenByIdQuery finder)
+    public Optional<Kitchen> handler(FindKitchenByIdQuery finder)
     {
-        return this.repository.search(finder.getKitchenId());
+        return this.repository.findById(finder.getKitchenId());
     }
 
-    public Kitchen handler(Long kitchenId) {
-        return this.repository.search(kitchenId);
+    public Optional<Kitchen> handler(Long kitchenId) {
+        return this.repository.findById(kitchenId);
     }
 }

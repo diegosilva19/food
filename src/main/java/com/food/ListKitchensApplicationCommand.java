@@ -26,7 +26,7 @@ public class ListKitchensApplicationCommand {
                                             .run(args);
 
         KitchenRepository handler = application.getBean(KitchenRepository.class);
-        List<Kitchen> listagem = handler.list();
+        List<Kitchen> listagem = handler.findAll();
 
         for(Kitchen item : listagem) {
             System.out.println("Mostrnado item via Command Line -> " + item.getName());
