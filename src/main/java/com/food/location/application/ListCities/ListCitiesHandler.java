@@ -15,6 +15,6 @@ public class ListCitiesHandler {
 
     public List<City> handle()
     {
-        return this.repository.list();
+        return this.repository.findAll();
     }
 }

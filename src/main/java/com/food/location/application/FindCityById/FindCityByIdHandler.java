@@ -14,11 +14,10 @@ public class FindCityByIdHandler {
 
     public City handle(FindCityByIdQuery query) {
 
-        City city = this.repository.searchById(query.getCityId());
-
-        if (city == null) {
-            throw new NotFoundCityException(query.getCityId());
-        }
+        City city = this.repository.findById(query.getCityId())
+                .orElseThrow(
+                        () -> new NotFoundCityException(query.getCityId())
+                );
 
         return city;
     }

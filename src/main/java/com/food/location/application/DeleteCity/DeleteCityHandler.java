@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 @Service
 public class DeleteCityHandler {
@@ -15,13 +16,10 @@ public class DeleteCityHandler {
 
     public boolean handle(DeleteCityCommand command)
     {
-        City city = this.repository.searchById(command.getCityId());
-
-        if (city == null) {
-            throw new EntityNotFoundException(
+        City city = this.repository.findById(command.getCityId())
+                .orElseThrow(() -> new EntityNotFoundException(
                     String.format("City: %d not found", command.getCityId())
-            );
-        }
+                ));
 
         this.repository.delete(city);
         return true;

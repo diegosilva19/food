@@ -1,18 +1,11 @@
 package com.food.location.domain;
 
 import com.food.location.domain.entities.City;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 
 @Component
-public interface CityRepository {
+public interface CityRepository extends JpaRepository<City, Short> {
 
-    public City searchById(Short id);
-
-    public List<City> list();
-
-    public City save(City city);
-
-    void delete(City city);
 }

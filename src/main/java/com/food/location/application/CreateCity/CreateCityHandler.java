@@ -42,6 +42,7 @@ public class CreateCityHandler {
             if (stateDatabase == null) {
                 throw new NotFoundStateException(state.getId());
             }
+            state = stateDatabase;
         }
 
         city.setState(state);

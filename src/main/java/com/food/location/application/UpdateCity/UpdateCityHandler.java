@@ -20,11 +20,8 @@ public class UpdateCityHandler {
 
     public City handle(UpdateCityCommand command)
     {
-        City city = this.repository.searchById(command.getCity().getId());
-
-        if (city == null) {
-            throw new NotFoundCityException(command.getCity().getId());
-        }
+        City city = this.repository.findById(command.getCity().getId())
+                .orElseThrow(() -> new NotFoundCityException(command.getCity().getId()));
 
         city = this.fetchStateDependecy(city);
 
@@ -43,6 +40,7 @@ public class UpdateCityHandler {
             if (stateDatabase == null) {
                 throw new NotFoundStateException(state.getId());
             }
+            state = stateDatabase;
         }
 
         city.setState(state);
