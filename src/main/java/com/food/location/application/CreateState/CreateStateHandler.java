@@ -3,9 +3,9 @@ package com.food.location.application.CreateState;
 import com.food.location.domain.StateRepository;
 import com.food.location.domain.entities.State;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class CreateStateHandler {
 
     @Autowired

@@ -1,5 +1,7 @@
 package com.food.location.application.UpdateCity;
 
+import com.food.location.application.FindStateById.FindStateByIdHandler;
+import com.food.location.application.FindStateById.FindStateByIdQuery;
 import com.food.location.domain.CityRepository;
 import com.food.location.domain.StateRepository;
 import com.food.location.domain.entities.City;
@@ -16,7 +18,7 @@ public class UpdateCityHandler {
     private CityRepository repository;
 
     @Autowired
-    private StateRepository repositoryState;
+    private FindStateByIdHandler stateFinder;
 
     public City handle(UpdateCityCommand command)
     {
@@ -30,20 +32,14 @@ public class UpdateCityHandler {
         return city;
     }
 
-    private City fetchStateDependecy(City city) {
-
+    private City fetchStateDependecy(City city)
+    {
         State state = city.getState();
 
         if (state != null && state.getId() > 0) {
-            State stateDatabase = this.repositoryState.searchById(state.getId());
-
-            if (stateDatabase == null) {
-                throw new NotFoundStateException(state.getId());
-            }
-            state = stateDatabase;
+            city.setState(this.stateFinder.handle(new FindStateByIdQuery(state.getId())));
         }
 
-        city.setState(state);
         return city;
     }
 }

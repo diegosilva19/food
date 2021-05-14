@@ -16,11 +16,8 @@ public class DeleteStatesHandler {
 
     public boolean handle(DeleteStatesCommand command)
     {
-        State stateDatabase = this.repository.searchById(command.getStateId());
-
-        if (stateDatabase == null) {
-            throw new NotFoundStateException(command.getStateId());
-        }
+        State stateDatabase = this.repository.findById(command.getStateId())
+                .orElseThrow(() -> new NotFoundStateException(command.getStateId()));
 
         try {
             this.repository.delete(stateDatabase);

@@ -12,14 +12,9 @@ public class FindStateByIdHandler {
     @Autowired
     private StateRepository repository;
 
-    public State handle(FindStateByIdQuery query)
+    public State handle(FindStateByIdQuery query) throws NotFoundStateException
     {
-        State state = this.repository.searchById(query.getStateId());
-
-        if (state == null) {
-            throw new NotFoundStateException(query.getStateId());
-        }
-
-        return state;
+        return this.repository.findById(query.getStateId())
+                .orElseThrow(() -> new NotFoundStateException(query.getStateId()));
     }
 }

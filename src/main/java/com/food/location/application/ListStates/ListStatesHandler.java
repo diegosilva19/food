@@ -15,6 +15,6 @@ public class ListStatesHandler {
     
     public List<State> handle()
     {
-        return this.repository.list();
+        return this.repository.findAll();
     }
 }

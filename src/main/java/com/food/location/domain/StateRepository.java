@@ -1,18 +1,13 @@
 package com.food.location.domain;
 
 import com.food.location.domain.entities.State;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Component
-public interface StateRepository {
+@Repository
+public interface StateRepository extends JpaRepository<State, Short> {
 
-    public State searchById(Short id);
-
-    public List<State> list();
-
-    public State save(State city);
-
-    void delete(State city);
 }
