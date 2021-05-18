@@ -12,8 +12,10 @@ public class FindRestaurantByIdHandler {
     @Autowired
     private RestaurantRepository repository;
 
-    public Restaurant handle(FindRestaurantByIdQuery query)
+    public Restaurant handle(FindRestaurantByIdQuery query) throws NotFoundRestaurantException
     {
-        return this.repository.searchById(query.getId());
+        return this.repository.findById(query.getId()).orElseThrow(
+                () -> new NotFoundRestaurantException(query.getId())
+        );
     }
 }

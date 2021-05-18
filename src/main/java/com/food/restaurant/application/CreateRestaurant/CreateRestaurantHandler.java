@@ -10,8 +10,6 @@ import com.food.restaurant.domain.event.CreateRestaurantEvent;
 import com.food.restaurant.domain.RestaurantRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class CreateRestaurantHandler {
 
@@ -46,8 +44,9 @@ public class CreateRestaurantHandler {
         Kitchen kitchen = restaurant.getKitchen();
 
         if (kitchen != null && kitchen.getId() != null) {
-            Optional<Kitchen> kitchenSearch = this.kitchenFinder.handler(kitchen.getId());
-            restaurant.setKitchen(kitchenSearch.orElseThrow(NotFoundKitchenExeception::new));
+            Kitchen kitchenSearch = this.kitchenFinder.handler(kitchen.getId())
+                    .orElseThrow(() -> new NotFoundKitchenExeception(kitchen.getId()));
+            restaurant.setKitchen(kitchenSearch);
         }
 
         return restaurant;

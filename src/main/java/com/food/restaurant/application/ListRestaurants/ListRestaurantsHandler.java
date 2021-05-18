@@ -15,6 +15,6 @@ public class ListRestaurantsHandler {
 
     public List<Restaurant> handle()
     {
-        return this.repository.list();
+        return this.repository.findAll();
     }
 }

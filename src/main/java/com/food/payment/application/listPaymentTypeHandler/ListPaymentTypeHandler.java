@@ -4,10 +4,11 @@ import com.food.payment.domain.PaymentTypeRepository;
 import com.food.payment.domain.entity.PaymentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 public class ListPaymentTypeHandler {
 
     @Autowired
@@ -15,6 +16,6 @@ public class ListPaymentTypeHandler {
 
     public List<PaymentType> handle()
     {
-        return this.repository.list();
+        return this.repository.findAll();
     }
 }

@@ -3,6 +3,7 @@ package com.food.restaurant.presentation.controller;
 import com.food.restaurant.application.FindRestaurantById.FindRestaurantByIdHandler;
 import com.food.restaurant.application.FindRestaurantById.FindRestaurantByIdQuery;
 import com.food.restaurant.domain.entity.Restaurant;
+import com.food.restaurant.domain.exception.NotFoundRestaurantException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +22,13 @@ public class FindRestaurantByIdController {
     @GetMapping("/{restaurantId}")
     public ResponseEntity<Restaurant> invoke(@PathVariable Long restaurantId) {
         FindRestaurantByIdQuery query = new FindRestaurantByIdQuery(restaurantId);
-        Restaurant restaurant = this.handler.handle(query);
 
-        if (restaurant == null) {
+        try {
+            Restaurant restaurant = this.handler.handle(query);
+            return ResponseEntity.status(HttpStatus.OK).body(restaurant);
+        } catch(NotFoundRestaurantException exception) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(restaurant);
     }
 }

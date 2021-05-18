@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class UpdateRestaurantHandler {
 
@@ -34,11 +32,10 @@ public class UpdateRestaurantHandler {
     public Restaurant handler(UpdateRestaurantCommand command)
     {
         this.restauranOrigin = command.getRestaurant();
-        this.restauranDatabase = this.repository.searchById(this.restauranOrigin.getId());
 
-        if (this.restauranDatabase == null) {
-            throw new NotFoundRestaurantException(this.restauranOrigin.getId());
-        }
+        this.restauranDatabase = this.repository.findById(this.restauranOrigin.getId()).orElseThrow(
+                () -> new NotFoundRestaurantException(this.restauranOrigin.getId())
+        );
 
         this.updateFieldsDatabaseResultSet(command);
 
@@ -79,8 +76,9 @@ public class UpdateRestaurantHandler {
         Kitchen kitchen = restaurant.getKitchen();
 
         if (kitchen != null && kitchen.getId() != null) {
-            Optional<Kitchen> kitchenSearch = this.kitchenFinder.handler(kitchen.getId());
-            restaurant.setKitchen(kitchenSearch.orElseThrow(NotFoundKitchenExeception::new));
+            Kitchen kitchenSearch = this.kitchenFinder.handler(kitchen.getId())
+                    .orElseThrow(NotFoundKitchenExeception::new);
+            restaurant.setKitchen(kitchenSearch);
         }
 
         this.restauranOrigin = restaurant;

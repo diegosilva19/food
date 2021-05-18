@@ -1,20 +1,9 @@
 package com.food.permission.domain;
 
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-@Component
-public interface PermissionRepository {
-
-    public Permission find(int id);
-
-    public List<Permission> list();
-
-    public Permission save(Permission permission);
-
-    public void delete(Permission permission);
-
-    public void delete(int id);
+@Repository
+public interface PermissionRepository extends JpaRepository<Permission, Integer> {
 
 }

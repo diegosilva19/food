@@ -7,4 +7,8 @@ public class NotFoundKitchenExeception extends RuntimeException {
     public NotFoundKitchenExeception() {
         super("Kitchen Not Found");
     }
+
+    public NotFoundKitchenExeception(Long id) {
+        super(String.format("Kitchen %d Not Found", id));
+    }
 }

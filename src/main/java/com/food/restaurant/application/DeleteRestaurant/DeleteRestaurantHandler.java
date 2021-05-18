@@ -14,11 +14,9 @@ public class DeleteRestaurantHandler {
 
     public boolean handle(DeleteRestaurantCommand command)
     {
-        Restaurant restaurant = this.repository.searchById(command.getRestaurantId());
-
-        if (restaurant == null) {
-            throw new NotFoundRestaurantException(command.getRestaurantId());
-        }
+        Restaurant restaurant = this.repository.findById(command.getRestaurantId()).orElseThrow(
+                () -> new NotFoundRestaurantException(command.getRestaurantId())
+        );
 
         this.repository.delete(restaurant);
 

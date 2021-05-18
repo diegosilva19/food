@@ -6,6 +6,8 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
 
+import java.util.Optional;
+
 /**
  * toda necessidade de pegar um Application context , deve ser feito na raiz da aplicação,  por que o
  * spring só lê os pacotes do nível mais alto para o mais baixo logo
@@ -24,7 +26,24 @@ public class SearchRestaurantApplicationCommand {
                                             .run(args);
 
         RestaurantRepository handler = application.getBean(RestaurantRepository.class);
-        Restaurant item = handler.searchById(2L);
-        System.out.printf("%s - %f - %s", item.getName(), item.getFeeTransportTaxe(), item.getKitchen().getName());
+        handler.findById(2L).ifPresent(
+                restaurant -> {
+                    System.out.printf("%s - %f - %s", restaurant.getName(),
+                            restaurant.getFeeTransportTaxe(), restaurant.getKitchen().getName());
+                }
+        );
+        // OR
+        /*
+        handler.findById(2L).ifPresent(
+              SearchRestaurantApplicationCommand::printInformation
+        );
+
+         */
+    }
+
+    public static void printInformation(Restaurant restaurant)
+    {
+        System.out.printf("%s - %f - %s", restaurant.getName(),
+                restaurant.getFeeTransportTaxe(), restaurant.getKitchen().getName());
     }
 }
